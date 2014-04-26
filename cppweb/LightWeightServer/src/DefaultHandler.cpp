@@ -1,10 +1,3 @@
-//
-// TimeHandler.cpp
-//
-// This file has been generated from TimeHandler.cpsp on 2010-01-28 08:49:54.
-//
-
-
 #include "DefaultHandler.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -13,6 +6,11 @@
 
 #include "Poco/DateTime.h"
 #include "Poco/DateTimeFormatter.h"
+#line 5 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultHandler.xml"
+
+using Poco::DateTimeFormatter;
+using Poco::DateTime;
+using namespace std;
 
 
 void DefaultHandler::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response)
@@ -26,24 +24,27 @@ void DefaultHandler::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::
 	responseStream << "\n";
 	responseStream << "";
 	responseStream << "\n";
+	responseStream << "";
 	responseStream << "\n";
 	responseStream << "";
-#line 6 "/ws/poco-1.3/PageCompiler/samples/HTTPTimeServer/src/TimeHandler.cpsp"
+#line 10 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultHandler.xml"
 
-    Poco::DateTime now;
-    std::string dt(Poco::DateTimeFormatter::format(now, "%W, %e %b %y %H:%M:%S %Z"));
+DateTime now;
+string dt(DateTimeFormatter::format(now, "%W, %e %b %y %H:%M:%S %Z"));
 	responseStream << "\n";
 	responseStream << "<html>\n";
-	responseStream << "<head>\n";
-	responseStream << "<title>HTTPTimeServer powered by POCO C++ Libraries and PageCompiler</title>\n";
-	responseStream << "<meta http-equiv=\"refresh\" content=\"1\">\n";
-	responseStream << "</head>\n";
-	responseStream << "<body>\n";
-	responseStream << "<p style=\"text-align: center; font-size: 48px;\">";
-#line 16 "/ws/poco-1.3/PageCompiler/samples/HTTPTimeServer/src/TimeHandler.cpsp"
+	responseStream << "  <head>\n";
+	responseStream << "    <title>LightWeightServer powered by POCO C++ Libraries and PageCompiler</title>\n";
+	responseStream << "    <meta http-equiv=\"refresh\" content=\"1\"/>\n";
+	responseStream << "  </head>\n";
+	responseStream << "  <body>\n";
+	responseStream << "    <p style=\"text-align: center; font-size: 48px;\">\n";
+	responseStream << "      ";
+#line 21 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultHandler.xml"
 	responseStream << ( dt );
-	responseStream << "</p>\n";
-	responseStream << "</body>\n";
+	responseStream << "\n";
+	responseStream << "    </p>\n";
+	responseStream << "  </body>\n";
 	responseStream << "</html>\n";
 	responseStream << "";
 }

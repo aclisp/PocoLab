@@ -25,8 +25,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\DefaultHandler.cpsp">
+    <Xml Include="src\DefaultHandler.xml">
       <Filter>Page Files</Filter>
-    </None>
+    </Xml>
   </ItemGroup>
 </Project>

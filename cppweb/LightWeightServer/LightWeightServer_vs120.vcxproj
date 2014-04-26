@@ -304,14 +304,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="src\DefaultHandler.cpsp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\LightWeightServer.cpp" />
     <ClCompile Include="src\DefaultHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="src\DefaultHandler.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

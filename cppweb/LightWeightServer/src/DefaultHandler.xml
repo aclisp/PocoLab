@@ -1,0 +1,24 @@
+<%@ page class="DefaultHandler" %>
+<%@ impl include="Poco/DateTime.h"
+         include="Poco/DateTimeFormatter.h"
+%>
+<%!
+using Poco::DateTimeFormatter;
+using Poco::DateTime;
+using namespace std;
+%>
+<%
+DateTime now;
+string dt(DateTimeFormatter::format(now, "%W, %e %b %y %H:%M:%S %Z"));
+%>
+<html>
+  <head>
+    <title>LightWeightServer powered by POCO C++ Libraries and PageCompiler</title>
+    <meta http-equiv="refresh" content="1"/>
+  </head>
+  <body>
+    <p style="text-align: center; font-size: 48px;">
+      <%= dt %>
+    </p>
+  </body>
+</html>
