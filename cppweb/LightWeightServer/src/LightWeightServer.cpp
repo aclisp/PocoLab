@@ -146,37 +146,40 @@ protected:
 		helpFormatter.format(std::cout);
 	}
 
-	int main(const std::vector<std::string>& args)
-	{
-		if (_helpRequested)
-		{
-			displayHelp();
-		}
-		else
-		{
-			// get parameters from configuration file
-			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port", 9980);
-			
-			// set-up a server socket
-			ServerSocket svs(port);
-			// set-up a HTTPServer instance
-			DefaultRequestHandlerFactory* pFactory = new DefaultRequestHandlerFactory;
-			HTTPServerParams* pParams = new HTTPServerParams;
-			HTTPServer srv(pFactory, svs, pParams);
-			// start the HTTPServer
-			srv.start();
-			// wait for CTRL-C or kill
-			waitForTerminationRequest();
-			// Stop the HTTPServer
-			srv.stop();
-		}
-		Thread::sleep(10000);
-		return Application::EXIT_OK;
-	}
+	int main(const std::vector<std::string>& args);
 	
 private:
 	bool _helpRequested;
 };
+
+
+int LightWeightServer::main(const std::vector<std::string>& args)
+{
+	if (_helpRequested)
+	{
+		displayHelp();
+	}
+	else
+	{
+		// get parameters from configuration file
+		unsigned short port = (unsigned short)config().getInt("HTTPTimeServer.port", 9980);
+
+		// set-up a server socket
+		ServerSocket svs(port);
+		// set-up a HTTPServer instance
+		DefaultRequestHandlerFactory* pFactory = new DefaultRequestHandlerFactory;
+		HTTPServerParams* pParams = new HTTPServerParams;
+		HTTPServer srv(pFactory, svs, pParams);
+		// start the HTTPServer
+		srv.start();
+		// wait for CTRL-C or kill
+		waitForTerminationRequest();
+		// Stop the HTTPServer
+		srv.stop();
+	}
+	Thread::sleep(10000);
+	return Application::EXIT_OK;
+}
 
 
 int main(int argc, char** argv)
