@@ -14,6 +14,7 @@
 #include "Poco/Util/Option.h"
 #include "Poco/Util/OptionSet.h"
 #include "Poco/Util/HelpFormatter.h"
+#include "Poco/LeakDetector.h"
 #include "Poco/Thread.h"
 #include <iostream>
 
@@ -30,6 +31,7 @@ using Poco::Util::Application;
 using Poco::Util::Option;
 using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
+using Poco::LeakDetector;
 using Poco::Thread;
 
 
@@ -110,6 +112,7 @@ int LightWeightServer::main(const std::vector<std::string>& args)
 
 int main(int argc, char** argv)
 {
+	LeakDetector leak;
     LightWeightServer app;
     return app.run(argc, argv);
 }

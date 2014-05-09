@@ -45,13 +45,14 @@ class StaticFileHandler: public Poco::Net::HTTPRequestHandler
 public:
     void handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response)
     {
-        poco_debug(logger(), request.getURI());
+        //poco_debug(logger(), request.getURI());
 
         URI uri(request.getURI());
+		const string& path = uri.getPath();
 
         response.sendFile(
-            Application::instance().config().getString("application.dir").append(request.getURI()),
-            getMediaType(uri.getPath()));
+			Application::instance().config().getString("application.configDir").append(path),
+			getMediaType(path));
     }
 private:
     string getMediaType(const string& uriPath)
@@ -150,10 +151,12 @@ HTTPRequestHandler* DefaultRequestHandlerFactory::createRequestHandler(const HTT
     {
         if ( it->match(request.getMethod(), uri.getPath()) )
         {
+			poco_debug_f2(Logger::get("page.entry"), "match method=%s path=%s", request.getMethod(), uri.getPath());
             return it->createHandler();
         }
     }
 
+	poco_debug(Logger::get("page.entry"), "No handler found");
     return 0;
 
 //    if (request.getURI() == "/")

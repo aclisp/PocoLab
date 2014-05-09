@@ -92,7 +92,7 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 
     DateTime now;
     string dt = DateTimeFormatter::format(now, "%W, %e %b %y %H:%M:%S %Z");
-    poco_debug(logger(), request.getURI());
+    //poco_debug(logger(), request.getURI());
 
     StringMap runtimeProp;
     getRuntimeProperties(runtimeProp);
