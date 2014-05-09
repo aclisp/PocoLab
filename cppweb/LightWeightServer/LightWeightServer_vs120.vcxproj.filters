@@ -15,18 +15,27 @@
     <ClCompile Include="src\LightWeightServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\DefaultHandler.cpp">
+    <ClCompile Include="src\DefaultRequestHandlerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DefaultPage.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\DefaultHandler.h">
+    <ClInclude Include="src\DefaultRequestHandlerFactory.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightWeightServer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DefaultPage.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="src\DefaultHandler.xml">
+    <CustomBuild Include="src\DefaultPage.cpsp">
       <Filter>Page Files</Filter>
-    </Xml>
+    </CustomBuild>
   </ItemGroup>
 </Project>

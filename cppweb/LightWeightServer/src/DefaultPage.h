@@ -1,15 +1,15 @@
-#ifndef DefaultHandler_INCLUDED
-#define DefaultHandler_INCLUDED
+#ifndef DefaultPage_INCLUDED
+#define DefaultPage_INCLUDED
 
 
 #include "Poco/Net/HTTPRequestHandler.h"
 
 
-class DefaultHandler: public Poco::Net::HTTPRequestHandler
+class DefaultPage: public Poco::Net::HTTPRequestHandler
 {
 public:
 	void handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response);
 };
 
 
-#endif // DefaultHandler_INCLUDED
+#endif // DefaultPage_INCLUDED

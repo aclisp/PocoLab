@@ -9,19 +9,15 @@
 include $(POCO_BASE)/build/rules/global
 
 # Where to find the PageCompiler executable
-PAGECOMPILER = $(POCO_BASE)/PageCompiler/bin/$(POCO_HOST_OSNAME)/$(POCO_HOST_OSARCH)/cpspc
+PAGECOMPILER = $(POCO_BUILD)/PageCompiler/bin/$(POCO_HOST_OSNAME)/$(POCO_HOST_OSARCH)/cpspc
 
-objects = HTTPTimeServerApp TimeHandler
+objects = LightWeightServer DefaultRequestHandlerFactory DefaultPage
 
-target         = HTTPTimeServer
+target         = lwserv
 target_version = 1
-target_libs    = PocoUtil PocoJSON PocoNet PocoXML PocoFoundation
+target_libs    = PocoUtil PocoNet PocoXML PocoFoundation
 
 include $(POCO_BASE)/build/rules/exec
-
-ifdef POCO_UNBUNDLED
-        SYSLIBS += -lz -lpcre -lexpat
-endif
 
 # Rule for runnning PageCompiler
 src/%.cpp: src/%.cpsp

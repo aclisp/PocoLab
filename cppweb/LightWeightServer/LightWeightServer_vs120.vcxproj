@@ -304,16 +304,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DefaultPage.cpp" />
+    <ClCompile Include="src\DefaultRequestHandlerFactory.cpp" />
     <ClCompile Include="src\LightWeightServer.cpp" />
-    <ClCompile Include="src\DefaultHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\DefaultHandler.h" />
+    <ClInclude Include="src\DefaultPage.h" />
+    <ClInclude Include="src\DefaultRequestHandlerFactory.h" />
+    <ClInclude Include="src\LightWeightServer.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="src\DefaultHandler.xml">
-      <SubType>Designer</SubType>
-    </Xml>
+    <CustomBuild Include="src\DefaultPage.cpsp">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">cpspcd src/%(Filename).cpsp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">src\%(Filename).h;src\%(Filename).cpp;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">** Compiling Page %(Filename).cpsp</Message>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
