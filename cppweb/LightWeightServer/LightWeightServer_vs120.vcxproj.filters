@@ -10,6 +10,9 @@
     <Filter Include="Generated Files">
       <UniqueIdentifier>{9fe9dd81-546c-487a-a7ac-54d062fb939e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Precompiled Headers">
+      <UniqueIdentifier>{909b1b2d-038b-4349-9e1a-6b30d89236e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LightWeightServer.cpp">
@@ -21,6 +24,9 @@
     <ClCompile Include="src\DefaultPage.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PrecompiledHeaders.cpp">
+      <Filter>Precompiled Headers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultRequestHandlerFactory.h">
@@ -31,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="src\DefaultPage.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PrecompiledHeaders.h">
+      <Filter>Precompiled Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

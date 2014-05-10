@@ -1,0 +1,57 @@
+<%@ page class="TemplatePage"
+%> <%-- Specifies the name of the generated class. --%>
+
+<%@ impl include="LightWeightServer.h"
+%> <%-- Include a C++ header file in the generated implementation file. --%>
+
+<%-- An implementation declaration is copied to the implementation file 
+immediately after the block containing the standard #include directives. 
+It is used to include additional header files and using declarations, as 
+well as to define classes needed later on. --%>
+<%!
+    using Poco::Util::AbstractConfiguration;
+    using Poco::Util::Application;
+    using Poco::Net::HTTPServer;
+    using Poco::DateTimeFormatter;
+    using Poco::DateTime;
+    using Poco::Logger;
+    using Poco::Timespan;
+    using std::string;
+    using std::map;
+
+    typedef map<string, string> StringMap;
+
+    Logger& logger()
+    {
+        return Logger::get("page.default");
+    }
+%>
+
+<%-- Arbitrary C++ code fragments can be included using the Scriptlet directive. --%>
+<%
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Template Page powered by POCO C++ Libraries and PageCompiler</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1>Hello, world!</h1>
+
+        <!-- TODO start your page from here -->
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

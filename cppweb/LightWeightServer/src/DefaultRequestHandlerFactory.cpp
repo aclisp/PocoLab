@@ -1,18 +1,6 @@
+#include "PrecompiledHeaders.h"
 #include "DefaultRequestHandlerFactory.h"
 #include "DefaultPage.h"
-
-#include "Poco/Net/HTTPServerRequest.h"
-#include "Poco/Net/HTTPServerResponse.h"
-#include "Poco/Net/HTTPRequestHandler.h"
-#include "Poco/Util/Application.h"
-#include "Poco/Logger.h"
-#include "Poco/Instantiator.h"
-#include "Poco/SharedPtr.h"
-#include "Poco/URI.h"
-#include "Poco/RegularExpression.h"
-
-#include <string>
-#include <vector>
 
 
 using Poco::Net::HTTPRequestHandler;

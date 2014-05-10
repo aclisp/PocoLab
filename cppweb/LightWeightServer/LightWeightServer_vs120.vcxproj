@@ -136,10 +136,11 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <PrecompiledHeader />
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <PrecompiledHeaderFile>PrecompiledHeaders.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -307,11 +308,15 @@
     <ClCompile Include="src\DefaultPage.cpp" />
     <ClCompile Include="src\DefaultRequestHandlerFactory.cpp" />
     <ClCompile Include="src\LightWeightServer.cpp" />
+    <ClCompile Include="src\PrecompiledHeaders.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultPage.h" />
     <ClInclude Include="src\DefaultRequestHandlerFactory.h" />
     <ClInclude Include="src\LightWeightServer.h" />
+    <ClInclude Include="src\PrecompiledHeaders.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\DefaultPage.cpsp">

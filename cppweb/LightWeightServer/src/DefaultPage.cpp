@@ -1,3 +1,4 @@
+#include "PrecompiledHeaders.h"
 #include "DefaultPage.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -5,16 +6,7 @@
 
 
 #include "LightWeightServer.h"
-#include "Poco/DateTime.h"
-#include "Poco/DateTimeFormatter.h"
-#include "Poco/Logger.h"
-#include "Poco/Util/AbstractConfiguration.h"
-#include "Poco/Util/Application.h"
-#include "Poco/Net/HTTPServer.h"
-#include "Poco/Timespan.h"
-#include <string>
-#include <map>
-#line 16 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 7 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 
     using Poco::Util::AbstractConfiguration;
     using Poco::Util::Application;
@@ -88,7 +80,7 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "\n";
 	responseStream << "\n";
 	responseStream << "";
-#line 72 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 63 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 
     DateTime now;
     string dt = DateTimeFormatter::format(now, "%W, %e %b %y %H:%M:%S %Z");
@@ -118,7 +110,7 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "    </head>\n";
 	responseStream << "    <body>\n";
 	responseStream << "        <p style=\"text-align: center; font-size: 48px;\">";
-#line 100 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 91 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 	responseStream << ( dt );
 	responseStream << "</p>\n";
 	responseStream << "        <h1>Server Runtime Properties</h1>\n";
@@ -129,20 +121,20 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "            </tr> </thead>\n";
 	responseStream << "            <tbody>\n";
 	responseStream << "            ";
-#line 108 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 99 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
  for (StringMap::const_iterator it = runtimeProp.begin(); it != runtimeProp.end(); ++it) { 	responseStream << "\n";
 	responseStream << "            <tr>\n";
 	responseStream << "                <td>";
-#line 110 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 101 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 	responseStream << ( it->first );
 	responseStream << "</td>\n";
 	responseStream << "                <td>";
-#line 111 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 102 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 	responseStream << ( it->second );
 	responseStream << "</td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 113 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 104 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";
@@ -154,20 +146,20 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "            </tr> </thead>\n";
 	responseStream << "            <tbody>\n";
 	responseStream << "            ";
-#line 123 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 114 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
  for (StringMap::const_iterator it = appProp.begin(); it != appProp.end(); ++it) { 	responseStream << "\n";
 	responseStream << "            <tr>\n";
 	responseStream << "                <td>";
-#line 125 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 116 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 	responseStream << ( it->first );
 	responseStream << "</td>\n";
 	responseStream << "                <td>";
-#line 126 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 117 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
 	responseStream << ( it->second );
 	responseStream << "</td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 128 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 119 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";

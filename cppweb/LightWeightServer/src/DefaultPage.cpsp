@@ -2,15 +2,6 @@
 %>
 
 <%@ impl include="LightWeightServer.h"
-         include="Poco/DateTime.h"
-         include="Poco/DateTimeFormatter.h"
-         include="Poco/Logger.h"
-         include="Poco/Util/AbstractConfiguration.h"
-         include="Poco/Util/Application.h"
-         include="Poco/Net/HTTPServer.h"
-         include="Poco/Timespan.h"
-        sinclude="string"
-        sinclude="map"
 %>
 
 <%!
