@@ -20,7 +20,7 @@
 
     typedef map<string, string> StringMap;
 
-    Logger& logger()
+    static Logger& logger()
     {
         return Logger::get("page.default");
     }

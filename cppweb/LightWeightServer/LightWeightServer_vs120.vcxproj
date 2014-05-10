@@ -311,15 +311,25 @@
     <ClCompile Include="src\PrecompiledHeaders.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\StudentPage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultPage.h" />
     <ClInclude Include="src\DefaultRequestHandlerFactory.h" />
     <ClInclude Include="src\LightWeightServer.h" />
     <ClInclude Include="src\PrecompiledHeaders.h" />
+    <ClInclude Include="src\StudentPage.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\DefaultPage.cpsp">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">cpspcd src/%(Filename).cpsp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">src\%(Filename).h;src\%(Filename).cpp;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">** Compiling Page %(Filename).cpsp</Message>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="src\StudentPage.cpsp">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">cpspcd src/%(Filename).cpsp</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">src\%(Filename).h;src\%(Filename).cpp;%(Outputs)</Outputs>

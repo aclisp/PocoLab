@@ -1,6 +1,7 @@
 #include "PrecompiledHeaders.h"
 #include "DefaultRequestHandlerFactory.h"
 #include "DefaultPage.h"
+#include "StudentPage.h"
 
 
 using Poco::Net::HTTPRequestHandler;
@@ -120,9 +121,9 @@ DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
 	addNav <StaticFileHandler>       ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
 
 //    addNav <StudentListPage>         ("GET", "/student") // return a list of all records
-//    addNav <StudentPage>             ("GET", "/student/new") // return a form for creating a new record
-//    addNav <StudentPage>             ("GET", "/student/\d+/edit") // return a form to edit the record by id
-//    addNav <StudentPage>             ("GET", "/student/\d+") // return the record by id
+	addNav <StudentPage>             ("GET", "/student/new"); // return a form for creating a new record
+	addNav <StudentPage>             ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
+	addNav <StudentPage>             ("GET", "/student/\\d+"); // return the record by id
 
 //    addNav <StudentCRUDHandler>      ("POST", "/student") // submit fields for creating a new record
 //    addNav <StudentCRUDHandler>      ("POST", "/student/\d+") // destroy or submit fields for updating the record by id

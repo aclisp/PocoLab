@@ -1,4 +1,4 @@
-<%@ page class="TemplatePage"
+<%@ page class="StudentPage"
 %> <%-- Specifies the name of the generated class. --%>
 
 <%@ impl include="LightWeightServer.h"
