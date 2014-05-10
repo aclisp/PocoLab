@@ -57,12 +57,14 @@ public:
 private:
     string getMediaType(const string& uriPath)
     {
-        if (hasSuffix(uriPath, ".js"))
-            return "application/javascript";
-        else if (hasSuffix(uriPath, ".css"))
-            return "text/css";
-        else
-            return "";
+        if (hasSuffix(uriPath, ".js"))            return "application/javascript";
+        else if (hasSuffix(uriPath, ".css"))      return "text/css";
+		else if (hasSuffix(uriPath, ".svg"))      return "image/svg+xml";
+		else if (hasSuffix(uriPath, ".ttf"))      return "application/x-font-truetype";
+		else if (hasSuffix(uriPath, ".otf"))      return "application/x-font-opentype";
+		else if (hasSuffix(uriPath, ".woff"))     return "application/font-woff";
+		else if (hasSuffix(uriPath, ".eot"))      return "application/vnd.ms-fontobject";
+        else                                      return "";
     }
     Poco::Logger& logger()
     {
@@ -122,10 +124,12 @@ void addNav(const string& httpMethod, const string& uriPathPattern)
 
 DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
 {
+
     addNav <DefaultPage>             ("GET", "/");
 
-    addNav <StaticFileHandler>       ("GET", "/js/[\\w\\.]+\\.js"); // "application/javascript"
-    addNav <StaticFileHandler>       ("GET", "/css/[\\w\\.]+\\.css"); // "text/css"
+    addNav <StaticFileHandler>       ("GET", "/js/[\\w\\.-]+\\.js"); // "application/javascript"
+    addNav <StaticFileHandler>       ("GET", "/css/[\\w\\.-]+\\.css"); // "text/css"
+	addNav <StaticFileHandler>       ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
 
 //    addNav <StudentListPage>         ("GET", "/student") // return a list of all records
 //    addNav <StudentPage>             ("GET", "/student/new") // return a form for creating a new record
@@ -134,6 +138,8 @@ DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
 
 //    addNav <StudentCRUDHandler>      ("POST", "/student") // submit fields for creating a new record
 //    addNav <StudentCRUDHandler>      ("POST", "/student/\d+") // destroy or submit fields for updating the record by id
+
+	poco_debug_f1(Application::instance().logger(), "add %z navigation rules", navigationRules.size());
 }
 
 
@@ -144,19 +150,19 @@ DefaultRequestHandlerFactory::~DefaultRequestHandlerFactory()
 
 HTTPRequestHandler* DefaultRequestHandlerFactory::createRequestHandler(const HTTPServerRequest& request)
 {
-    poco_debug_f2(Logger::get("page.entry"), "%s %s", request.getMethod(), request.getURI());
+    //poco_debug_f2(Logger::get("page.entry"), "%s %s", request.getMethod(), request.getURI());
     URI uri(request.getURI());
 
     for (NavVector::const_iterator it = navigationRules.begin(); it != navigationRules.end(); ++it)
     {
         if ( it->match(request.getMethod(), uri.getPath()) )
         {
-			poco_debug_f2(Logger::get("page.entry"), "match method=%s path=%s", request.getMethod(), uri.getPath());
+			poco_debug_f2(Logger::get("page.entry"), "Match %s %s", request.getMethod(), request.getURI());
             return it->createHandler();
         }
     }
 
-	poco_debug(Logger::get("page.entry"), "No handler found");
+	poco_debug_f2(Logger::get("page.entry"), "Not found %s %s", request.getMethod(), request.getURI());
     return 0;
 
 //    if (request.getURI() == "/")
