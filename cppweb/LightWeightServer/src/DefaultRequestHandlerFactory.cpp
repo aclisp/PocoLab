@@ -30,22 +30,22 @@ public:
         //poco_debug(logger(), request.getURI());
 
         URI uri(request.getURI());
-		const string& path = uri.getPath();
+        const string& path = uri.getPath();
 
         response.sendFile(
-			Application::instance().config().getString("application.configDir").append(path),
-			getMediaType(path));
+            Application::instance().config().getString("application.configDir").append(path),
+            getMediaType(path));
     }
 private:
     string getMediaType(const string& uriPath)
     {
         if (hasSuffix(uriPath, ".js"))            return "application/javascript";
         else if (hasSuffix(uriPath, ".css"))      return "text/css";
-		else if (hasSuffix(uriPath, ".svg"))      return "image/svg+xml";
-		else if (hasSuffix(uriPath, ".ttf"))      return "application/x-font-truetype";
-		else if (hasSuffix(uriPath, ".otf"))      return "application/x-font-opentype";
-		else if (hasSuffix(uriPath, ".woff"))     return "application/font-woff";
-		else if (hasSuffix(uriPath, ".eot"))      return "application/vnd.ms-fontobject";
+        else if (hasSuffix(uriPath, ".svg"))      return "image/svg+xml";
+        else if (hasSuffix(uriPath, ".ttf"))      return "application/x-font-truetype";
+        else if (hasSuffix(uriPath, ".otf"))      return "application/x-font-opentype";
+        else if (hasSuffix(uriPath, ".woff"))     return "application/font-woff";
+        else if (hasSuffix(uriPath, ".eot"))      return "application/vnd.ms-fontobject";
         else                                      return "";
     }
     Poco::Logger& logger()
@@ -92,6 +92,8 @@ typedef vector<Navigation> NavVector;
 template <class Handler>
 static
 void addNav(const string& httpMethod, const string& uriPathPattern)
+    /// A navigation rule is determined by *httpMethod* and *uriPathPattern*.
+    /// It does not care about the query string.
 {
     navigationRules.push_back(
         Navigation(
@@ -111,17 +113,17 @@ DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
 
     addNav <StaticFileHandler>       ("GET", "/js/[\\w\\.-]+\\.js"); // "application/javascript"
     addNav <StaticFileHandler>       ("GET", "/css/[\\w\\.-]+\\.css"); // "text/css"
-	addNav <StaticFileHandler>       ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
+    addNav <StaticFileHandler>       ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
 
 //    addNav <StudentListPage>         ("GET", "/student") // return a list of all records
-	addNav <StudentPage>             ("GET", "/student/new"); // return a form for creating a new record
-	addNav <StudentPage>             ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
-	addNav <StudentPage>             ("GET", "/student/\\d+"); // return the record by id
+    addNav <StudentPage>             ("GET", "/student/new"); // return a form for creating a new record
+    addNav <StudentPage>             ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
+    addNav <StudentPage>             ("GET", "/student/\\d+"); // return the record by id
 
 //    addNav <StudentCRUDHandler>      ("POST", "/student") // submit fields for creating a new record
 //    addNav <StudentCRUDHandler>      ("POST", "/student/\d+") // destroy or submit fields for updating the record by id
 
-	poco_debug_f1(Application::instance().logger(), "add %z navigation rules", navigationRules.size());
+    poco_debug_f1(Application::instance().logger(), "add %z navigation rules", navigationRules.size());
 }
 
 
@@ -139,12 +141,12 @@ HTTPRequestHandler* DefaultRequestHandlerFactory::createRequestHandler(const HTT
     {
         if ( it->match(request.getMethod(), uri.getPath()) )
         {
-			poco_debug_f2(Logger::get("page.entry"), "Match %s %s", request.getMethod(), request.getURI());
+            poco_debug_f2(Logger::get("page.entry"), "Match %s %s", request.getMethod(), request.getURI());
             return it->createHandler();
         }
     }
 
-	poco_debug_f2(Logger::get("page.entry"), "Not found %s %s", request.getMethod(), request.getURI());
+    poco_debug_f2(Logger::get("page.entry"), "Not found %s %s", request.getMethod(), request.getURI());
     return 0;
 
 //    if (request.getURI() == "/")

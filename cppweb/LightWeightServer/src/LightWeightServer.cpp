@@ -96,7 +96,7 @@ int LightWeightServer::main(const std::vector<std::string>& args)
 
 int main(int argc, char** argv)
 {
-	LeakDetector leak;
+    LeakDetector leak;
     LightWeightServer app;
     return app.run(argc, argv);
 }
