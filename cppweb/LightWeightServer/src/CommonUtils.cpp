@@ -11,6 +11,10 @@ using Poco::URI;
 using Poco::Timespan;
 using Poco::DateTimeFormatter;
 using std::string;
+using namespace Poco::Data;
+
+
+static SessionPool* pSessionPool = NULL;
 
 
 bool hasSuffix(const string &str, const string &suffix)
@@ -95,3 +99,21 @@ void getRuntimeProperties(StringMap& prop)
     prop["runtime.totalConnections"] = Poco::format("%d", server.totalConnections());
 }
 
+
+Session getSession()
+{
+    return pSessionPool->get();
+}
+
+
+void createSessionPool()
+{
+    pSessionPool = new SessionPool("SQLite",
+        Application::instance().config().getString("application.configDir").append("/dummy.db"));
+}
+
+
+void destorySessionPool()
+{
+    delete pSessionPool;
+}

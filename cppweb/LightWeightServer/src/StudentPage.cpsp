@@ -11,6 +11,7 @@ well as to define classes needed later on. --%>
 <%!
     using Poco::Logger;
     using std::string;
+    using namespace Poco::Data;
 
     static Logger& logger()
     {
@@ -25,21 +26,26 @@ well as to define classes needed later on. --%>
 
     string studentId = getId(request);
     poco_debug_f1(logger(), "id=%s", studentId);
+    string studentName;
+    string studentTel;
 
-    // find student by Id
-    string studentName = "Homer Huang";
-    string studentTel = "13922115830";
-
-    if (IsEdit(request)) {
-        title = "Change Student Information";
-        action = "/student/" + studentId;
-    }
-    else if (IsNew(request)) {
+    if (IsNew(request)) {
         title = "Add a New Student";
         action = "/student";
+    }
+    else { // find student by Id
+        Session db(getSession());
+        db << "SELECT NAME,TEL FROM STUDENT WHERE ID=?", 
+              into(studentName),
+              into(studentTel),
+              use(studentId),
+              lowerLimit(1),
+              now;
 
-        studentName = "";
-        studentTel = "";
+        if (IsEdit(request)) {
+            title = "Change Student Information";
+            action = "/student/" + studentId;
+        }
     }
 %>
 

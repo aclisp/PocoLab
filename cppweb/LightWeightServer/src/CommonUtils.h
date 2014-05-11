@@ -13,5 +13,9 @@ std::string getId(const Poco::Net::HTTPServerRequest& request);
 void getApplicationProperties(const std::string& base, StringMap& prop);
 void getRuntimeProperties(StringMap& prop);
 
+Poco::Data::Session getSession();
+void createSessionPool();
+void destorySessionPool();
+
 
 #endif // CommonUtils_INCLUDED

@@ -1,6 +1,7 @@
 #include "PrecompiledHeaders.h"
 #include "LightWeightServer.h"
 #include "DefaultRequestHandlerFactory.h"
+#include "CommonUtils.h"
 
 
 using Poco::Net::ServerSocket;
@@ -17,17 +18,22 @@ using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
 using Poco::LeakDetector;
 using Poco::Thread;
+using namespace Poco::Data;
 
 
 void LightWeightServer::initialize(Application& self)
 {
     loadConfiguration(); // load default configuration files, if present
     ServerApplication::initialize(self);
+    SQLite::Connector::registerConnector();
+    createSessionPool();
 }
 
 
 void LightWeightServer::uninitialize()
 {
+    destorySessionPool();
+    SQLite::Connector::unregisterConnector();
     ServerApplication::uninitialize();
 }
 

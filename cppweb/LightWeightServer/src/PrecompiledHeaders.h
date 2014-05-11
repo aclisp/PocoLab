@@ -1,6 +1,9 @@
 #ifndef PrecompiledHeaders_INCLUDED
 #define PrecompiledHeaders_INCLUDED
 
+#include "Poco/Data/Common.h"
+#include "Poco/Data/SessionPool.h"
+#include "Poco/Data/SQLite/Connector.h"
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPRequestHandlerFactory.h"

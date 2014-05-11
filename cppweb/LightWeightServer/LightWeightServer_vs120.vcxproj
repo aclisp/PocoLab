@@ -126,7 +126,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\include;D:\CppDev\poco-1.4.6p4-all\Foundation\include;D:\CppDev\poco-1.4.6p4-all\XML\include;D:\CppDev\poco-1.4.6p4-all\Util\include;D:\CppDev\poco-1.4.6p4-all\Net\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;D:\CppDev\poco-1.4.6p4-all\Foundation\include;D:\CppDev\poco-1.4.6p4-all\XML\include;D:\CppDev\poco-1.4.6p4-all\Util\include;D:\CppDev\poco-1.4.6p4-all\Net\include;D:\CppDev\poco-1.4.6p4-all\Data\include;D:\CppDev\poco-1.4.6p4-all\Data\SQLite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;WINVER=0x0500;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
