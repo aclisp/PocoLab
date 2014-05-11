@@ -313,6 +313,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\StudentHandler.cpp" />
+    <ClCompile Include="src\StudentListPage.cpp" />
     <ClCompile Include="src\StudentPage.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +323,7 @@
     <ClInclude Include="src\LightWeightServer.h" />
     <ClInclude Include="src\PrecompiledHeaders.h" />
     <ClInclude Include="src\StudentHandler.h" />
+    <ClInclude Include="src\StudentListPage.h" />
     <ClInclude Include="src\StudentPage.h" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +336,14 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\StudentPage.cpsp">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">cpspcd src/%(Filename).cpsp</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">src\%(Filename).h;src\%(Filename).cpp;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">** Compiling Page %(Filename).cpsp</Message>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="src\StudentListPage.cpsp">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">cpspcd src/%(Filename).cpsp</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">src\%(Filename).h;src\%(Filename).cpp;%(Outputs)</Outputs>

@@ -90,67 +90,75 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "        <![endif]-->\n";
 	responseStream << "    </head>\n";
 	responseStream << "    <body>\n";
+	responseStream << "        <ol class=\"breadcrumb\">\n";
+	responseStream << "            <li><a href=\"/student\">All Student</a></li>\n";
+	responseStream << "            <li class=\"active\">";
+#line 70 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+	responseStream << ( title );
+	responseStream << "</li>\n";
+	responseStream << "        </ol>\n";
+	responseStream << "\n";
 	responseStream << "        <h1>";
-#line 68 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 73 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( title );
 	responseStream << "</h1>\n";
 	responseStream << "\n";
 	responseStream << "        <form action=\"";
-#line 70 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 75 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( action );
 	responseStream << "\" method=\"post\">\n";
 	responseStream << "            <input type=\"hidden\" name=\"id\" value=\"";
-#line 71 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 76 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentId );
 	responseStream << "\" >\n";
 	responseStream << "            <div class=\"form-group\">\n";
 	responseStream << "                <label for=\"studentInputName1\">Name</label>\n";
 	responseStream << "                <input type=\"text\" class=\"form-control\" id=\"studentInputName1\" placeholder=\"Name\" name=\"name\" value=\"";
-#line 74 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 79 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentName );
 	responseStream << "\" >\n";
 	responseStream << "            </div>\n";
 	responseStream << "            <div class=\"form-group\">\n";
 	responseStream << "                <label for=\"studentInputTel1\">Telephone number</label>\n";
 	responseStream << "                <input type=\"text\" class=\"form-control\" id=\"studentInputTel1\" placeholder=\"Telephone number\" name=\"tel\" value=\"";
-#line 78 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 83 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentTel );
 	responseStream << "\" >\n";
 	responseStream << "            </div>\n";
 	responseStream << "            ";
-#line 80 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 85 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsNew(request)) { 	responseStream << "\n";
 	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"POST\" >\n";
 	responseStream << "                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n";
 	responseStream << "            ";
-#line 83 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 88 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            ";
-#line 84 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 89 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsEdit(request)) { 	responseStream << "\n";
 	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"PUT\" >\n";
 	responseStream << "                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n";
 	responseStream << "            ";
-#line 87 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 92 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "        </form>\n";
 	responseStream << "\n";
 	responseStream << "        <p>";
-#line 90 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 95 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsEdit(request)) { 	responseStream << "\n";
 	responseStream << "            <form action=\"";
-#line 91 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 96 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( action );
 	responseStream << "\" method=\"post\">\n";
 	responseStream << "                <input type=\"hidden\" name=\"id\" value=\"";
-#line 92 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 97 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentId );
 	responseStream << "\" >\n";
 	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"DELETE\" >\n";
 	responseStream << "                <button type=\"submit\" class=\"btn btn-danger\">Delete</button>\n";
 	responseStream << "            </form>\n";
 	responseStream << "        ";
-#line 96 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 101 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << " </p>\n";
 	responseStream << "\n";
 	responseStream << "        <script src=\"/js/jquery.min.js\"></script>\n";

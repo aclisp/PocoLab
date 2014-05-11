@@ -36,6 +36,9 @@
     <ClCompile Include="src\StudentHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\StudentListPage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultRequestHandlerFactory.h">
@@ -59,12 +62,18 @@
     <ClInclude Include="src\StudentHandler.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\StudentListPage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\DefaultPage.cpsp">
       <Filter>Page Files</Filter>
     </CustomBuild>
     <CustomBuild Include="src\StudentPage.cpsp">
+      <Filter>Page Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\StudentListPage.cpsp">
       <Filter>Page Files</Filter>
     </CustomBuild>
   </ItemGroup>

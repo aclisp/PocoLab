@@ -1,0 +1,83 @@
+<%@ page class="StudentListPage"
+%> <%-- Specifies the name of the generated class. --%>
+
+<%@ impl include="CommonUtils.h"
+%> <%-- Include a C++ header file in the generated implementation file. --%>
+
+<%-- An implementation declaration is copied to the implementation file 
+immediately after the block containing the standard #include directives. 
+It is used to include additional header files and using declarations, as 
+well as to define classes needed later on. --%>
+<%!
+    using Poco::Tuple;
+    using Poco::Logger;
+    using std::string;
+    using namespace Poco::Data;
+
+    static Logger& logger()
+    {
+        return Logger::get("page.student");
+    }
+%>
+
+<%-- Arbitrary C++ code fragments can be included using the Scriptlet directive. --%>
+<%
+    typedef Tuple<string, string, string> Student;
+    typedef std::vector<Student> StudentVector;
+
+    Session db(getSession());
+    StudentVector studentVector;
+    db << "SELECT ID,NAME,TEL FROM STUDENT", into(studentVector), now;
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>All Students</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1>All Students</h1>
+
+        <a href="/student/new" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span> Add a New Student
+        </a>
+
+        <div class="table-responsive"> <table class="table table-striped table-condensed table-hover">
+            <thead> <tr>
+                <th>Name</th>
+                <th>Telephone number</th>
+                <th>Action</th>
+            </tr> </thead>
+            <tbody>
+            <% for (StudentVector::const_iterator it = studentVector.begin(); it != studentVector.end(); ++it) { %>
+            <tr>
+                <td><%= it->get<1>() %></td>
+                <td><%= it->get<2>() %></td>
+                <td>
+                    <a href="/student/<%= it->get<0>() %>">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/student/<%= it->get<0>() %>/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table> </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

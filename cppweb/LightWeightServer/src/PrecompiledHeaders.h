@@ -28,6 +28,7 @@
 #include "Poco/DateTime.h"
 #include "Poco/DateTimeFormatter.h"
 #include "Poco/Timespan.h"
+#include "Poco/Tuple.h"
 
 #include <iostream>
 #include <string>

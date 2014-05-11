@@ -2,6 +2,7 @@
 #include "DefaultRequestHandlerFactory.h"
 #include "DefaultPage.h"
 #include "StudentPage.h"
+#include "StudentListPage.h"
 #include "StudentHandler.h"
 #include "CommonUtils.h"
 
@@ -116,7 +117,7 @@ DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
     addNav <StaticFileHandler>   ("GET", "/css/[\\w\\.-]+\\.css"); // "text/css"
     addNav <StaticFileHandler>   ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
 
-//    addNav <StudentListPage>   ("GET", "/student") // return a list of all records
+    addNav <StudentListPage>     ("GET", "/student"); // return a list of all records
     addNav <StudentPage>         ("GET", "/student/new"); // return a form for creating a new record
     addNav <StudentPage>         ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
     addNav <StudentPage>         ("GET", "/student/\\d+"); // return the record by id
