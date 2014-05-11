@@ -13,7 +13,7 @@ well as to define classes needed later on. --%>
 
     static Logger& logger()
     {
-        return Logger::get("page.default");
+        return Logger::get("page.template");
     }
 %>
 
@@ -37,7 +37,9 @@ well as to define classes needed later on. --%>
         <![endif]-->
     </head>
     <body>
-        <h1>Hello, world!</h1>
+        <% if (IsEdit(request)) { %><h1>Hello, edit!</h1><% } %>
+        <% if (IsNew(request)) { %><h1>Hello, new!</h1><% } %>
+        <% if (IsShow(request)) { %><h1>Hello, world!</h1><% } %>
 
         <!-- TODO start your page from here -->
 

@@ -312,6 +312,7 @@
     <ClCompile Include="src\PrecompiledHeaders.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug_shared|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\StudentHandler.cpp" />
     <ClCompile Include="src\StudentPage.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +321,7 @@
     <ClInclude Include="src\DefaultRequestHandlerFactory.h" />
     <ClInclude Include="src\LightWeightServer.h" />
     <ClInclude Include="src\PrecompiledHeaders.h" />
+    <ClInclude Include="src\StudentHandler.h" />
     <ClInclude Include="src\StudentPage.h" />
   </ItemGroup>
   <ItemGroup>

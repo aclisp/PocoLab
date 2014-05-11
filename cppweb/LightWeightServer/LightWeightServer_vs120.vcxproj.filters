@@ -33,6 +33,9 @@
     <ClCompile Include="src\CommonUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\StudentHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultRequestHandlerFactory.h">
@@ -51,6 +54,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CommonUtils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StudentHandler.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

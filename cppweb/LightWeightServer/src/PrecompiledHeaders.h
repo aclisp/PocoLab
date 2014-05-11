@@ -7,6 +7,7 @@
 #include "Poco/Net/HTTPServerParams.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
+#include "Poco/Net/HTMLForm.h"
 #include "Poco/Net/ServerSocket.h"
 #include "Poco/Util/ServerApplication.h"
 #include "Poco/Util/Application.h"

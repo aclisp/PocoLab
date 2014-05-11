@@ -2,6 +2,7 @@
 #include "DefaultRequestHandlerFactory.h"
 #include "DefaultPage.h"
 #include "StudentPage.h"
+#include "StudentHandler.h"
 #include "CommonUtils.h"
 
 
@@ -109,19 +110,19 @@ void addNav(const string& httpMethod, const string& uriPathPattern)
 DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
 {
 
-    addNav <DefaultPage>             ("GET", "/");
+    addNav <DefaultPage>         ("GET", "/");
 
-    addNav <StaticFileHandler>       ("GET", "/js/[\\w\\.-]+\\.js"); // "application/javascript"
-    addNav <StaticFileHandler>       ("GET", "/css/[\\w\\.-]+\\.css"); // "text/css"
-    addNav <StaticFileHandler>       ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
+    addNav <StaticFileHandler>   ("GET", "/js/[\\w\\.-]+\\.js"); // "application/javascript"
+    addNav <StaticFileHandler>   ("GET", "/css/[\\w\\.-]+\\.css"); // "text/css"
+    addNav <StaticFileHandler>   ("GET", "/fonts/[\\w\\.-]+\\.[\\w]+");
 
-//    addNav <StudentListPage>         ("GET", "/student") // return a list of all records
-    addNav <StudentPage>             ("GET", "/student/new"); // return a form for creating a new record
-    addNav <StudentPage>             ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
-    addNav <StudentPage>             ("GET", "/student/\\d+"); // return the record by id
+//    addNav <StudentListPage>   ("GET", "/student") // return a list of all records
+    addNav <StudentPage>         ("GET", "/student/new"); // return a form for creating a new record
+    addNav <StudentPage>         ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
+    addNav <StudentPage>         ("GET", "/student/\\d+"); // return the record by id
 
-//    addNav <StudentCRUDHandler>      ("POST", "/student") // submit fields for creating a new record
-//    addNav <StudentCRUDHandler>      ("POST", "/student/\d+") // destroy or submit fields for updating the record by id
+    addNav <StudentHandler>      ("POST", "/student"); // submit fields for creating a new record
+    addNav <StudentHandler>      ("POST", "/student/\\d+"); // destroy or submit fields for updating the record by id
 
     poco_debug_f1(Application::instance().logger(), "add %z navigation rules", navigationRules.size());
 }
@@ -146,7 +147,7 @@ HTTPRequestHandler* DefaultRequestHandlerFactory::createRequestHandler(const HTT
         }
     }
 
-    poco_debug_f2(Logger::get("page.entry"), "Not found %s %s", request.getMethod(), request.getURI());
+    poco_warning_f2(Logger::get("page.entry"), "Not found %s %s", request.getMethod(), request.getURI());
     return 0;
 
 //    if (request.getURI() == "/")
