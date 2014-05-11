@@ -305,6 +305,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CommonUtils.cpp" />
     <ClCompile Include="src\DefaultPage.cpp" />
     <ClCompile Include="src\DefaultRequestHandlerFactory.cpp" />
     <ClCompile Include="src\LightWeightServer.cpp" />
@@ -314,6 +315,7 @@
     <ClCompile Include="src\StudentPage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CommonUtils.h" />
     <ClInclude Include="src\DefaultPage.h" />
     <ClInclude Include="src\DefaultRequestHandlerFactory.h" />
     <ClInclude Include="src\LightWeightServer.h" />

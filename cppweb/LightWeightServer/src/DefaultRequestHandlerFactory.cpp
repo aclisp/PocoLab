@@ -2,6 +2,7 @@
 #include "DefaultRequestHandlerFactory.h"
 #include "DefaultPage.h"
 #include "StudentPage.h"
+#include "CommonUtils.h"
 
 
 using Poco::Net::HTTPRequestHandler;
@@ -19,14 +20,6 @@ using std::vector;
 
 
 namespace {
-
-
-static
-bool hasSuffix(const std::string &str, const std::string &suffix)
-{
-    return str.size() >= suffix.size() &&
-           str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
-}
 
 
 class StaticFileHandler: public Poco::Net::HTTPRequestHandler

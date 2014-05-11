@@ -5,20 +5,10 @@
 #include "Poco/Net/HTMLForm.h"
 
 
-#include "LightWeightServer.h"
+#include "CommonUtils.h"
 #line 11 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 
-    using Poco::Util::AbstractConfiguration;
-    using Poco::Util::Application;
-    using Poco::Net::HTTPServer;
-    using Poco::DateTimeFormatter;
-    using Poco::DateTime;
     using Poco::Logger;
-    using Poco::Timespan;
-    using std::string;
-    using std::map;
-
-    typedef map<string, string> StringMap;
 
     static Logger& logger()
     {
@@ -49,7 +39,7 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "";
 	responseStream << "\n";
 	responseStream << "";
-#line 31 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 21 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 
 	responseStream << "\n";
 	responseStream << "\n";

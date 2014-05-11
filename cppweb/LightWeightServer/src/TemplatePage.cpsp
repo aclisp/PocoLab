@@ -1,7 +1,7 @@
 <%@ page class="TemplatePage"
 %> <%-- Specifies the name of the generated class. --%>
 
-<%@ impl include="LightWeightServer.h"
+<%@ impl include="CommonUtils.h"
 %> <%-- Include a C++ header file in the generated implementation file. --%>
 
 <%-- An implementation declaration is copied to the implementation file 
@@ -9,17 +9,7 @@ immediately after the block containing the standard #include directives.
 It is used to include additional header files and using declarations, as 
 well as to define classes needed later on. --%>
 <%!
-    using Poco::Util::AbstractConfiguration;
-    using Poco::Util::Application;
-    using Poco::Net::HTTPServer;
-    using Poco::DateTimeFormatter;
-    using Poco::DateTime;
     using Poco::Logger;
-    using Poco::Timespan;
-    using std::string;
-    using std::map;
-
-    typedef map<string, string> StringMap;
 
     static Logger& logger()
     {

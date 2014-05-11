@@ -30,6 +30,9 @@
     <ClCompile Include="src\StudentPage.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CommonUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DefaultRequestHandlerFactory.h">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="src\StudentPage.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommonUtils.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
