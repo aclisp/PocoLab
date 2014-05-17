@@ -25,7 +25,7 @@ well as to define classes needed later on. --%>
     string action = "#";
 
     string studentId = getId(request);
-    poco_debug_f1(logger(), "id=%s", studentId);
+    //poco_debug_f1(logger(), "id=%s", studentId);
     string studentName;
     string studentTel;
 
@@ -43,7 +43,7 @@ well as to define classes needed later on. --%>
               now;
 
         if (IsEdit(request)) {
-            title = "Change Student Information";
+            title = "Student Information";
             action = "/student/" + studentId;
         }
     }
@@ -84,21 +84,15 @@ well as to define classes needed later on. --%>
             </div>
             <% if (IsNew(request)) { %>
                 <input type="hidden" name="_method" value="POST" >
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-warning">Save</button>
             <% } %>
             <% if (IsEdit(request)) { %>
                 <input type="hidden" name="_method" value="PUT" >
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-warning">Save</button>
+                <button type="submit" class="btn btn-danger" 
+                        onclick="this.form._method.value='DELETE'">Delete</button>
             <% } %>
         </form>
-
-        <p><% if (IsEdit(request)) { %>
-            <form action="<%= action %>" method="post">
-                <input type="hidden" name="id" value="<%= studentId %>" >
-                <input type="hidden" name="_method" value="DELETE" >
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        <% } %> </p>
 
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>

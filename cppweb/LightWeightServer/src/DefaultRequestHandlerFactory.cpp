@@ -120,7 +120,7 @@ DefaultRequestHandlerFactory::DefaultRequestHandlerFactory()
     addNav <StudentListPage>     ("GET", "/student"); // return a list of all records
     addNav <StudentPage>         ("GET", "/student/new"); // return a form for creating a new record
     addNav <StudentPage>         ("GET", "/student/\\d+/edit"); // return a form to edit the record by id
-    addNav <StudentPage>         ("GET", "/student/\\d+"); // return the record by id
+    //addNav <StudentPage>         ("GET", "/student/\\d+"); // return the record by id
 
     addNav <StudentHandler>      ("POST", "/student"); // submit fields for creating a new record
     addNav <StudentHandler>      ("POST", "/student/\\d+"); // destroy or submit fields for updating the record by id

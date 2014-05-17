@@ -16,6 +16,32 @@ static Poco::Logger& logger()
 }
 
 
+static void doPost(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
+{
+    Session db(getSession());
+    db << "INSERT INTO STUDENT VALUES (NULL,?,?)", use(form["name"]), use(form["tel"]), now;
+    string studentId;
+    db << "SELECT last_insert_rowid()", into(studentId), now;
+    response.redirect(Poco::format("/student/%s/edit", studentId));
+}
+
+
+static void doPut(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
+{
+    Session db(getSession());
+    db << "UPDATE STUDENT SET NAME=?,TEL=? WHERE ID=?", use(form["name"]), use(form["tel"]), use(form["id"]), now;
+    response.redirect(Poco::format("/student/%s/edit", form["id"]));
+}
+
+
+static void doDelete(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
+{
+    Session db(getSession());
+    db << "DELETE FROM STUDENT WHERE ID=?", use(form["id"]), now;
+    response.redirect("/student");
+}
+
+
 void StudentHandler::handleRequest(HTTPServerRequest& request, HTTPServerResponse& response)
 {
     poco_assert_dbg(request.getMethod() == "POST");
@@ -25,21 +51,14 @@ void StudentHandler::handleRequest(HTTPServerRequest& request, HTTPServerRespons
         form["_method"], form["id"], 
         form.get("name", ""), form.get("tel", ""));
 
-    Session db(getSession());
-
     if (form["_method"] == "POST") {
-        db << "INSERT INTO STUDENT VALUES (NULL,?,?)", use(form["name"]), use(form["tel"]), now;
-        string studentId;
-        db << "SELECT last_insert_rowid()", into(studentId), now;
-        response.redirect("/student/" + studentId);
+        doPost(request, response, form);
     }
     else if (form["_method"] == "PUT") {
-        db << "UPDATE STUDENT SET NAME=?,TEL=? WHERE ID=?", use(form["name"]), use(form["tel"]), use(form["id"]), now;
-        response.redirect("/student/" + form["id"]);
+        doPut(request, response, form);
     }
     else if (form["_method"] == "DELETE") {
-        db << "DELETE FROM STUDENT WHERE ID=?", use(form["id"]), now;
-        response.redirect("/student");
+        doDelete(request, response, form);
     }
     else {
     	poco_bugcheck();

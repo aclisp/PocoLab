@@ -71,7 +71,7 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "        <h1>All Students</h1>\n";
 	responseStream << "\n";
 	responseStream << "        <a href=\"/student/new\" class=\"btn btn-primary\">\n";
-	responseStream << "            <span class=\"glyphicon glyphicon-plus\"></span> Add a New Student\n";
+	responseStream << "            <span class=\"glyphicon glyphicon-plus\"></span> New\n";
 	responseStream << "        </a>\n";
 	responseStream << "\n";
 	responseStream << "        <div class=\"table-responsive\"> <table class=\"table table-striped table-condensed table-hover\">\n";
@@ -93,16 +93,9 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 #line 65 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 	responseStream << ( it->get<2>() );
 	responseStream << "</td>\n";
-	responseStream << "                <td>\n";
+	responseStream << "                <td>                    \n";
 	responseStream << "                    <a href=\"/student/";
 #line 67 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
-	responseStream << ( it->get<0>() );
-	responseStream << "\">\n";
-	responseStream << "                        <span class=\"glyphicon glyphicon-list\"></span>\n";
-	responseStream << "                    </a>\n";
-	responseStream << "                    &nbsp;&nbsp;&nbsp;&nbsp;\n";
-	responseStream << "                    <a href=\"/student/";
-#line 71 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 	responseStream << ( it->get<0>() );
 	responseStream << "/edit\">\n";
 	responseStream << "                        <span class=\"glyphicon glyphicon-edit\"></span>\n";
@@ -110,7 +103,7 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "                </td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 76 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
+#line 72 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";

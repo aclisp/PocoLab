@@ -47,7 +47,7 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
     string action = "#";
 
     string studentId = getId(request);
-    poco_debug_f1(logger(), "id=%s", studentId);
+    //poco_debug_f1(logger(), "id=%s", studentId);
     string studentName;
     string studentTel;
 
@@ -65,7 +65,7 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
               now;
 
         if (IsEdit(request)) {
-            title = "Change Student Information";
+            title = "Student Information";
             action = "/student/" + studentId;
         }
     }
@@ -129,7 +129,7 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 #line 85 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsNew(request)) { 	responseStream << "\n";
 	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"POST\" >\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n";
+	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">Save</button>\n";
 	responseStream << "            ";
 #line 88 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << "\n";
@@ -137,29 +137,13 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 #line 89 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsEdit(request)) { 	responseStream << "\n";
 	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"PUT\" >\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n";
+	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">Save</button>\n";
+	responseStream << "                <button type=\"submit\" class=\"btn btn-danger\" \n";
+	responseStream << "                        onclick=\"this.form._method.value='DELETE'\">Delete</button>\n";
 	responseStream << "            ";
-#line 92 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 94 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "        </form>\n";
-	responseStream << "\n";
-	responseStream << "        <p>";
-#line 95 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
- if (IsEdit(request)) { 	responseStream << "\n";
-	responseStream << "            <form action=\"";
-#line 96 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
-	responseStream << ( action );
-	responseStream << "\" method=\"post\">\n";
-	responseStream << "                <input type=\"hidden\" name=\"id\" value=\"";
-#line 97 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
-	responseStream << ( studentId );
-	responseStream << "\" >\n";
-	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"DELETE\" >\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-danger\">Delete</button>\n";
-	responseStream << "            </form>\n";
-	responseStream << "        ";
-#line 101 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
- } 	responseStream << " </p>\n";
 	responseStream << "\n";
 	responseStream << "        <script src=\"/js/jquery.min.js\"></script>\n";
 	responseStream << "        <script src=\"/js/bootstrap.min.js\"></script>\n";
