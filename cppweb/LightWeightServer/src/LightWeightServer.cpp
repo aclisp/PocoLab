@@ -102,7 +102,7 @@ int LightWeightServer::main(const std::vector<std::string>& args)
         pParams->setTimeout(Timespan(config().getInt("httpserver.timeoutSeconds"), 0));
         pParams->setKeepAlive(config().getBool("httpserver.keepAlive"));
         pParams->setMaxKeepAliveRequests(config().getInt("httpserver.maxKeepAliveRequests"));
-        pParams->setKeepAliveTimeout(Timespan(config().getInt("httpserver.keepAliveTimeoutSeconds")));
+        pParams->setKeepAliveTimeout(Timespan(config().getInt("httpserver.keepAliveTimeoutSeconds"), 0));
         HTTPServer srv(pFactory, getThreadPool(), svs, pParams);
         _pServer = &srv;
 
