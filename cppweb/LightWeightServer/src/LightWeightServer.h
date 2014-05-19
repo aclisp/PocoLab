@@ -47,6 +47,7 @@ class LightWeightServer : public Poco::Util::ServerApplication
         int main(const std::vector<std::string>& args);
 
     private:
+        void onRecordPerformanceCounters(Poco::Timer& timer);
         bool _helpRequested;
         const Poco::Net::HTTPServer* _pServer;
 };

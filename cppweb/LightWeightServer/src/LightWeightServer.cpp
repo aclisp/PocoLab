@@ -20,6 +20,10 @@ using Poco::Util::HelpFormatter;
 using Poco::LeakDetector;
 using Poco::Thread;
 using Poco::Timespan;
+using Poco::Timer;
+using Poco::TimerCallback;
+using Poco::DateTime;
+using Poco::DateTimeFormatter;
 using std::string;
 using namespace Poco::Data;
 
@@ -104,13 +108,70 @@ int LightWeightServer::main(const std::vector<std::string>& args)
 
         // start the HTTPServer
         srv.start();
+
+        // start the timer
+        Timer recordPerf(5000, 5000);
+        recordPerf.start(TimerCallback<LightWeightServer>(*this, &LightWeightServer::onRecordPerformanceCounters));
+
         // wait for CTRL-C or kill
         waitForTerminationRequest();
+
+        // stop the timer
+        recordPerf.stop();
+
         // Stop the HTTPServer
         srv.stopAll();
     }
 //    Thread::sleep(10000);
     return Application::EXIT_OK;
+}
+
+
+void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
+    /*
+       CREATE TABLE PerformanceCounters (
+            DateTime TEXT,
+            ThreadPoolCapacity INTEGER,
+            ThreadPoolUsed INTEGER,
+            ThreadPoolAllocated INTEGER, 
+            ThreadPoolAvailable INTEGER,
+            ServerCurrentThreads INTEGER,
+            ServerCurrentConnections INTEGER,
+            ServerMaxQueued INTEGER,
+            ServerQueuedConnections INTEGER,
+            ServerTotalConnections INTEGER,
+            ServerRefusedConnections INTEGER,
+            ServerMaxConcurrentConnections INTEGER
+       );
+
+     */
+{
+    //poco_debug(logger(), "onRecordPerformanceCounters");
+
+    DateTime current;
+
+    Session db(getSession());
+    db << "INSERT INTO PerformanceCounters VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+        use(DateTimeFormatter::format(current, "%Y-%m-%d %H:%M:%S.%i")), // TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS")
+        use(getThreadPool().capacity()),
+        use(getThreadPool().used()),
+        use(getThreadPool().allocated()),
+        use(getThreadPool().available()),
+        use(server().currentThreads()),
+        use(server().currentConnections()),
+        use(server().params().getMaxQueued()),
+        use(server().queuedConnections()),
+        use(server().totalConnections()),
+        use(server().refusedConnections()),
+        use(server().maxConcurrentConnections()),
+        now;
+
+    // remove data one minute ago
+    Timespan ago(0, 0, 1, 0, 0);
+
+    db << "DELETE FROM PerformanceCounters WHERE DateTime < ?",
+        use(DateTimeFormatter::format(current-ago, "%Y-%m-%d %H:%M:%S.%i")),
+        now;
 }
 
 
