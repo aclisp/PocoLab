@@ -10,11 +10,13 @@ using Poco::Net::HTTPServerRequest;
 using Poco::URI;
 using Poco::Timespan;
 using Poco::DateTimeFormatter;
+using Poco::ThreadPool;
 using std::string;
 using namespace Poco::Data;
 
 
 static SessionPool* pSessionPool = NULL;
+static ThreadPool* pThreadPool = NULL;
 
 
 bool hasSuffix(const string &str, const string &suffix)
@@ -106,14 +108,39 @@ Session getSession()
 }
 
 
-void createSessionPool()
+void createSessionPool(const AbstractConfiguration& config)
 {
-    pSessionPool = new SessionPool("SQLite",
-        Application::instance().config().getString("application.configDir").append("/dummy.db"));
+    pSessionPool = new SessionPool("SQLite", 
+        config.getString("application.configDir").append("/dummy.db"),
+        config.getInt("database.minSessions"),
+        config.getInt("database.maxSessions"),
+        config.getInt("database.idleTimeSeconds"));
 }
 
 
-void destorySessionPool()
+void destroySessionPool()
 {
     delete pSessionPool;
+}
+
+
+ThreadPool& getThreadPool()
+{
+    return *pThreadPool;
+}
+
+
+void createThreadPool(const AbstractConfiguration& config)
+{
+    pThreadPool = new ThreadPool(
+        config.getInt("threadpool.minCapacity"),
+        config.getInt("threadpool.maxCapacity"),
+        config.getInt("threadpool.idleTimeSeconds"),
+        config.getInt("threadpool.stackSizeBytes"));
+}
+
+
+void destroyThreadPool()
+{
+    delete pThreadPool;
 }

@@ -5,6 +5,7 @@
 
 
 using Poco::Net::ServerSocket;
+using Poco::Net::SocketAddress;
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPRequestHandlerFactory;
 using Poco::Net::HTTPServer;
@@ -18,6 +19,8 @@ using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
 using Poco::LeakDetector;
 using Poco::Thread;
+using Poco::Timespan;
+using std::string;
 using namespace Poco::Data;
 
 
@@ -26,13 +29,15 @@ void LightWeightServer::initialize(Application& self)
     loadConfiguration(); // load default configuration files, if present
     ServerApplication::initialize(self);
     SQLite::Connector::registerConnector();
-    createSessionPool();
+    createSessionPool(config());
+    createThreadPool(config());
 }
 
 
 void LightWeightServer::uninitialize()
 {
-    destorySessionPool();
+    destroyThreadPool();
+    destroySessionPool();
     SQLite::Connector::unregisterConnector();
     ServerApplication::uninitialize();
 }
@@ -77,15 +82,24 @@ int LightWeightServer::main(const std::vector<std::string>& args)
     else
     {
         // get parameters from configuration file
-        unsigned short port = (unsigned short)config().getInt("HTTPTimeServer.port", 9980);
+        string host = config().getString("serversocket.host", "0.0.0.0");
+        unsigned short port = (unsigned short)config().getInt("serversocket.port", 9980);
+        int backlog = config().getInt("serversocket.backlog", 64);
 
         // set-up a server socket
-        ServerSocket svs(port);
+        ServerSocket svs(SocketAddress(host, port), backlog);
+
         // set-up a HTTPServer instance
         DefaultRequestHandlerFactory* pFactory = new DefaultRequestHandlerFactory;
         HTTPServerParams* pParams = new HTTPServerParams;
-        HTTPServer srv(pFactory, svs, pParams);
-
+        pParams->setThreadIdleTime(Timespan(config().getInt("tcpserver.threadIdleTimeSeconds"), 0));
+        pParams->setMaxThreads(config().getInt("tcpserver.maxThreads"));
+        pParams->setMaxQueued(config().getInt("tcpserver.maxQueued"));
+        pParams->setTimeout(Timespan(config().getInt("httpserver.timeoutSeconds"), 0));
+        pParams->setKeepAlive(config().getBool("httpserver.keepAlive"));
+        pParams->setMaxKeepAliveRequests(config().getInt("httpserver.maxKeepAliveRequests"));
+        pParams->setKeepAliveTimeout(Timespan(config().getInt("httpserver.keepAliveTimeoutSeconds")));
+        HTTPServer srv(pFactory, getThreadPool(), svs, pParams);
         _pServer = &srv;
 
         // start the HTTPServer

@@ -19,6 +19,7 @@
 #include "Poco/Util/HelpFormatter.h"
 #include "Poco/Util/AbstractConfiguration.h"
 #include "Poco/LeakDetector.h"
+#include "Poco/ThreadPool.h"
 #include "Poco/Thread.h"
 #include "Poco/Logger.h"
 #include "Poco/Instantiator.h"

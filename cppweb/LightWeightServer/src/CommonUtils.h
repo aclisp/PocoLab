@@ -14,8 +14,12 @@ void getApplicationProperties(const std::string& base, StringMap& prop);
 void getRuntimeProperties(StringMap& prop);
 
 Poco::Data::Session getSession();
-void createSessionPool();
-void destorySessionPool();
+void createSessionPool(const Poco::Util::AbstractConfiguration& config);
+void destroySessionPool();
+
+Poco::ThreadPool& getThreadPool();
+void createThreadPool(const Poco::Util::AbstractConfiguration& config);
+void destroyThreadPool();
 
 
 #endif // CommonUtils_INCLUDED
