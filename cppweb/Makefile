@@ -9,4 +9,4 @@
 .PHONY: projects
 clean all: projects
 projects:
-	$(MAKE) -C HTTPTimeServer $(MAKECMDGOALS)
+	$(MAKE) -C LightWeightServer $(MAKECMDGOALS)
