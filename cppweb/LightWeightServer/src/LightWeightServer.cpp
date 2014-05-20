@@ -133,7 +133,7 @@ void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
             DateTime TEXT,
             ThreadPoolCapacity INTEGER,
             ThreadPoolUsed INTEGER,
-            ThreadPoolAllocated INTEGER, 
+            ThreadPoolAllocated INTEGER,
             ThreadPoolAvailable INTEGER,
             ServerCurrentThreads INTEGER,
             ServerCurrentConnections INTEGER,
@@ -166,8 +166,8 @@ void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
         use(server().maxConcurrentConnections()),
         now;
 
-    // remove data one minute ago
-    Timespan ago(0, 0, 1, 0, 0);
+    // remove data fifteen-minute ago
+    Timespan ago(0, 0, 15, 0, 0);
 
     db << "DELETE FROM PerformanceCounters WHERE DateTime < ?",
         use(DateTimeFormatter::format(current-ago, "%Y-%m-%d %H:%M:%S.%i")),

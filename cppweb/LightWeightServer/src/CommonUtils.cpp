@@ -99,6 +99,7 @@ void getRuntimeProperties(StringMap& prop)
     prop["runtime.queuedConnections"] = Poco::format("%d", server.queuedConnections());
     prop["runtime.refusedConnections"] = Poco::format("%d", server.refusedConnections());
     prop["runtime.totalConnections"] = Poco::format("%d", server.totalConnections());
+    prop["runtime.maxConcurrentConnections"] = Poco::format("%d", server.maxConcurrentConnections());
 }
 
 
@@ -110,7 +111,7 @@ Session getSession()
 
 void createSessionPool(const AbstractConfiguration& config)
 {
-    pSessionPool = new SessionPool("SQLite", 
+    pSessionPool = new SessionPool("SQLite",
         config.getString("application.configDir").append("/dummy.db"),
         config.getInt("database.minSessions"),
         config.getInt("database.maxSessions"),

@@ -33,11 +33,14 @@
     vector<int> threadPoolAvailable;
     vector<int> serverCurrentThreads;
     vector<int> serverCurrentConnections;
+    vector<int> serverQueuedConnections;
     Session db(getSession());
-    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections FROM PerformanceCounters", 
-        into(threadPoolAvailable), 
+    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections,ServerQueuedConnections "
+        "FROM PerformanceCounters",
+        into(threadPoolAvailable),
         into(serverCurrentThreads),
         into(serverCurrentConnections),
+        into(serverQueuedConnections),
         now;
 
 %>
@@ -60,7 +63,8 @@
     </head>
     <body>
         <p style="text-align: center; font-size: 48px;"><%= dt %></p>
-        <div id="placeholder" style="width:600px;height:300px"></div>
+        <div id="threadChart" style="width:600px;height:300px"></div>
+        <div id="queueChart" style="width:600px;height:100px"></div>
         <h1>Server Runtime Properties</h1>
         <div class="table-responsive"> <table class="table table-striped table-condensed table-hover">
             <thead> <tr>
@@ -95,7 +99,7 @@
         <script src="/js/jquery.flot.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script>
-            $.plot($("#placeholder"), [
+            $.plot($("#threadChart"), [
 
                 { label: "ThreadPoolAvailable", data: [
                     <% for (vector<int>::const_iterator it = threadPoolAvailable.begin(); it != threadPoolAvailable.end(); ++it) { %>
@@ -115,7 +119,17 @@
                     <% } %>
                 ]},
 
-            ], { xaxis: { max: 12 }, yaxis: { max: <%= getThreadPool().capacity() %> } });
+            ], { xaxis: { max: 180 }, yaxis: { max: <%= getThreadPool().capacity() %> } });
+
+            $.plot($("#queueChart"), [
+
+                { label: "ServerQueuedConnections", data: [
+                    <% for (vector<int>::const_iterator it = serverQueuedConnections.begin(); it != serverQueuedConnections.end(); ++it) { %>
+                        [<%= it - serverQueuedConnections.begin() %> , <%= *it %>],
+                    <% } %>
+                ]},
+
+            ], { xaxis: { max: 180 }, yaxis: { max: <%= appProp["tcpserver.maxQueued"] %> } });
         </script>
     </body>
 </html>
