@@ -16,10 +16,19 @@ static Poco::Logger& logger()
 }
 
 
+/*
+    CREATE TABLE Student (
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Name TEXT,
+        TelephoneNumber TEXT
+    );
+ */
+
+
 static void doPost(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
 {
     Session db(getSession());
-    db << "INSERT INTO STUDENT VALUES (NULL,?,?)", use(form["name"]), use(form["tel"]), now;
+    db << "INSERT INTO Student VALUES (NULL,?,?)", use(form["name"]), use(form["tel"]), now;
     string studentId;
     db << "SELECT last_insert_rowid()", into(studentId), now;
     response.redirect(Poco::format("/student/%s/edit", studentId));
@@ -29,7 +38,7 @@ static void doPost(HTTPServerRequest& request, HTTPServerResponse& response, con
 static void doPut(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
 {
     Session db(getSession());
-    db << "UPDATE STUDENT SET NAME=?,TEL=? WHERE ID=?", use(form["name"]), use(form["tel"]), use(form["id"]), now;
+    db << "UPDATE Student SET Name=?,TelephoneNumber=? WHERE Id=?", use(form["name"]), use(form["tel"]), use(form["id"]), now;
     response.redirect(Poco::format("/student/%s/edit", form["id"]));
 }
 
@@ -37,7 +46,7 @@ static void doPut(HTTPServerRequest& request, HTTPServerResponse& response, cons
 static void doDelete(HTTPServerRequest& request, HTTPServerResponse& response, const HTMLForm& form)
 {
     Session db(getSession());
-    db << "DELETE FROM STUDENT WHERE ID=?", use(form["id"]), now;
+    db << "DELETE FROM Student WHERE Id=?", use(form["id"]), now;
     response.redirect("/student");
 }
 

@@ -35,7 +35,7 @@ well as to define classes needed later on. --%>
     }
     else { // find student by Id
         Session db(getSession());
-        db << "SELECT NAME,TEL FROM STUDENT WHERE ID=?", 
+        db << "SELECT Name,TelephoneNumber FROM Student WHERE Id=?", 
               into(studentName),
               into(studentTel),
               use(studentId),

@@ -6,7 +6,7 @@
 
 
 #include "CommonUtils.h"
-#line 11 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 11 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 
     using Poco::Tuple;
     using Poco::Logger;
@@ -42,14 +42,14 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "";
 	responseStream << "\n";
 	responseStream << "";
-#line 24 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 24 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 
     typedef Tuple<string, string, string> Student;
     typedef std::vector<Student> StudentVector;
 
     Session db(getSession());
     StudentVector studentVector;
-    db << "SELECT ID,NAME,TEL FROM STUDENT", into(studentVector), now;
+    db << "SELECT Id,Name,TelephoneNumber FROM Student", into(studentVector), now;
     db.close();
 	responseStream << "\n";
 	responseStream << "\n";
@@ -83,20 +83,20 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "            </tr> </thead>\n";
 	responseStream << "            <tbody>\n";
 	responseStream << "            ";
-#line 63 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 63 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
  for (StudentVector::const_iterator it = studentVector.begin(); it != studentVector.end(); ++it) { 	responseStream << "\n";
 	responseStream << "            <tr>\n";
 	responseStream << "                <td>";
-#line 65 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 65 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 	responseStream << ( it->get<1>() );
 	responseStream << "</td>\n";
 	responseStream << "                <td>";
-#line 66 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 66 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 	responseStream << ( it->get<2>() );
 	responseStream << "</td>\n";
 	responseStream << "                <td>                    \n";
 	responseStream << "                    <a href=\"/student/";
-#line 68 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 68 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
 	responseStream << ( it->get<0>() );
 	responseStream << "/edit\">\n";
 	responseStream << "                        <span class=\"glyphicon glyphicon-edit\"></span>\n";
@@ -104,7 +104,7 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "                </td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 73 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/StudentListPage.cpsp"
+#line 73 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentListPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";
