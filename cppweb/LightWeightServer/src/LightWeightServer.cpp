@@ -141,7 +141,10 @@ void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
             ServerQueuedConnections INTEGER,
             ServerTotalConnections INTEGER,
             ServerRefusedConnections INTEGER,
-            ServerMaxConcurrentConnections INTEGER
+            ServerMaxConcurrentConnections INTEGER,
+            DatabaseSessionAllocated INTEGER,
+            DatabaseSessionUsed INTEGER,
+            DatabaseSessionIdle INTEGER
        );
 
      */
@@ -151,7 +154,7 @@ void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
     DateTime current;
 
     Session db(getSession());
-    db << "INSERT INTO PerformanceCounters VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+    db << "INSERT INTO PerformanceCounters VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         use(DateTimeFormatter::format(current, "%Y-%m-%d %H:%M:%S.%i")), // TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS")
         use(getThreadPool().capacity()),
         use(getThreadPool().used()),
@@ -164,6 +167,9 @@ void LightWeightServer::onRecordPerformanceCounters(Timer& timer)
         use(server().totalConnections()),
         use(server().refusedConnections()),
         use(server().maxConcurrentConnections()),
+        use(getSessionPool().allocated()),
+        use(getSessionPool().used()),
+        use(getSessionPool().idle()),
         now;
 
     // remove data fifteen-minute ago

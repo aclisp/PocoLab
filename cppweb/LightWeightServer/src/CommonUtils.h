@@ -14,6 +14,7 @@ void getApplicationProperties(const std::string& base, StringMap& prop);
 void getRuntimeProperties(StringMap& prop);
 
 Poco::Data::Session getSession();
+Poco::Data::SessionPool& getSessionPool();
 void createSessionPool(const Poco::Util::AbstractConfiguration& config);
 void destroySessionPool();
 

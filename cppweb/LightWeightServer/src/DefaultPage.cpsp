@@ -34,15 +34,21 @@
     vector<int> serverCurrentThreads;
     vector<int> serverCurrentConnections;
     vector<int> serverQueuedConnections;
+    vector<int> databaseSessionAllocated;
+    vector<int> databaseSessionUsed;
+
     Session db(getSession());
-    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections,ServerQueuedConnections "
+    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections,ServerQueuedConnections,"
+        "DatabaseSessionAllocated,DatabaseSessionUsed "
         "FROM PerformanceCounters",
         into(threadPoolAvailable),
         into(serverCurrentThreads),
         into(serverCurrentConnections),
         into(serverQueuedConnections),
+        into(databaseSessionAllocated),
+        into(databaseSessionUsed),
         now;
-
+    db.close();
 %>
 
 <!DOCTYPE html>
@@ -116,6 +122,18 @@
                 { label: "ServerCurrentConnections", data: [
                     <% for (vector<int>::const_iterator it = serverCurrentConnections.begin(); it != serverCurrentConnections.end(); ++it) { %>
                         [<%= it - serverCurrentConnections.begin() %> , <%= *it %>],
+                    <% } %>
+                ]},
+
+                { label: "DatabaseSessionAllocated", data: [
+                    <% for (vector<int>::const_iterator it = databaseSessionAllocated.begin(); it != databaseSessionAllocated.end(); ++it) { %>
+                        [<%= it - databaseSessionAllocated.begin() %> , <%= *it %>],
+                    <% } %>
+                ]},
+
+                { label: "DatabaseSessionUsed", data: [
+                    <% for (vector<int>::const_iterator it = databaseSessionUsed.begin(); it != databaseSessionUsed.end(); ++it) { %>
+                        [<%= it - databaseSessionUsed.begin() %> , <%= *it %>],
                     <% } %>
                 ]},
 

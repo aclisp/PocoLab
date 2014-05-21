@@ -125,6 +125,12 @@ void destroySessionPool()
 }
 
 
+SessionPool& getSessionPool()
+{
+    return *pSessionPool;
+}
+
+
 ThreadPool& getThreadPool()
 {
     return *pThreadPool;

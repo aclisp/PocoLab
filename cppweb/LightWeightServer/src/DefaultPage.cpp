@@ -6,7 +6,7 @@
 
 
 #include "CommonUtils.h"
-#line 7 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 7 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 
     using Poco::DateTimeFormatter;
     using Poco::DateTime;
@@ -39,7 +39,7 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "\n";
 	responseStream << "\n";
 	responseStream << "";
-#line 22 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 22 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 
     DateTime current;
     string dt = DateTimeFormatter::format(current, "%W, %e %b %y %H:%M:%S %Z");
@@ -54,13 +54,22 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
     vector<int> threadPoolAvailable;
     vector<int> serverCurrentThreads;
     vector<int> serverCurrentConnections;
+    vector<int> serverQueuedConnections;
+    vector<int> databaseSessionAllocated;
+    vector<int> databaseSessionUsed;
+
     Session db(getSession());
-    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections FROM PerformanceCounters", 
-        into(threadPoolAvailable), 
+    db << "SELECT ThreadPoolAvailable,ServerCurrentThreads,ServerCurrentConnections,ServerQueuedConnections,"
+        "DatabaseSessionAllocated,DatabaseSessionUsed "
+        "FROM PerformanceCounters",
+        into(threadPoolAvailable),
         into(serverCurrentThreads),
         into(serverCurrentConnections),
+        into(serverQueuedConnections),
+        into(databaseSessionAllocated),
+        into(databaseSessionUsed),
         now;
-
+    db.close();
 	responseStream << "\n";
 	responseStream << "\n";
 	responseStream << "<!DOCTYPE html>\n";
@@ -81,10 +90,11 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "    </head>\n";
 	responseStream << "    <body>\n";
 	responseStream << "        <p style=\"text-align: center; font-size: 48px;\">";
-#line 62 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 71 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( dt );
 	responseStream << "</p>\n";
-	responseStream << "        <div id=\"placeholder\" style=\"width:600px;height:300px\"></div>\n";
+	responseStream << "        <div id=\"threadChart\" style=\"width:600px;height:300px\"></div>\n";
+	responseStream << "        <div id=\"queueChart\" style=\"width:600px;height:100px\"></div>\n";
 	responseStream << "        <h1>Server Runtime Properties</h1>\n";
 	responseStream << "        <div class=\"table-responsive\"> <table class=\"table table-striped table-condensed table-hover\">\n";
 	responseStream << "            <thead> <tr>\n";
@@ -93,20 +103,20 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "            </tr> </thead>\n";
 	responseStream << "            <tbody>\n";
 	responseStream << "            ";
-#line 71 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 81 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  for (StringMap::const_iterator it = runtimeProp.begin(); it != runtimeProp.end(); ++it) { 	responseStream << "\n";
 	responseStream << "            <tr>\n";
 	responseStream << "                <td>";
-#line 73 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 83 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it->first );
 	responseStream << "</td>\n";
 	responseStream << "                <td>";
-#line 74 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 84 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it->second );
 	responseStream << "</td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 76 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 86 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";
@@ -118,20 +128,20 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "            </tr> </thead>\n";
 	responseStream << "            <tbody>\n";
 	responseStream << "            ";
-#line 86 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 96 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  for (StringMap::const_iterator it = appProp.begin(); it != appProp.end(); ++it) { 	responseStream << "\n";
 	responseStream << "            <tr>\n";
 	responseStream << "                <td>";
-#line 88 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 98 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it->first );
 	responseStream << "</td>\n";
 	responseStream << "                <td>";
-#line 89 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 99 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it->second );
 	responseStream << "</td>\n";
 	responseStream << "            </tr>\n";
 	responseStream << "            ";
-#line 91 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 101 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "            </tbody>\n";
 	responseStream << "        </table> </div>\n";
@@ -139,59 +149,114 @@ void DefaultPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "        <script src=\"/js/jquery.flot.min.js\"></script>\n";
 	responseStream << "        <script src=\"/js/bootstrap.min.js\"></script>\n";
 	responseStream << "        <script>\n";
-	responseStream << "            $.plot($(\"#placeholder\"), [\n";
+	responseStream << "            $.plot($(\"#threadChart\"), [\n";
 	responseStream << "\n";
 	responseStream << "                { label: \"ThreadPoolAvailable\", data: [\n";
 	responseStream << "                    ";
-#line 101 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 111 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  for (vector<int>::const_iterator it = threadPoolAvailable.begin(); it != threadPoolAvailable.end(); ++it) { 	responseStream << "\n";
 	responseStream << "                        [";
-#line 102 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 112 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it - threadPoolAvailable.begin() );
 	responseStream << " , ";
-#line 102 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 112 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( *it );
 	responseStream << "],\n";
 	responseStream << "                    ";
-#line 103 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 113 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "                ]},\n";
 	responseStream << "\n";
 	responseStream << "                { label: \"ServerCurrentThreads\", data: [\n";
 	responseStream << "                    ";
-#line 107 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 117 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  for (vector<int>::const_iterator it = serverCurrentThreads.begin(); it != serverCurrentThreads.end(); ++it) { 	responseStream << "\n";
 	responseStream << "                        [";
-#line 108 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 118 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it - serverCurrentThreads.begin() );
 	responseStream << " , ";
-#line 108 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 118 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( *it );
 	responseStream << "],\n";
 	responseStream << "                    ";
-#line 109 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 119 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "                ]},\n";
 	responseStream << "\n";
 	responseStream << "                { label: \"ServerCurrentConnections\", data: [\n";
 	responseStream << "                    ";
-#line 113 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 123 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  for (vector<int>::const_iterator it = serverCurrentConnections.begin(); it != serverCurrentConnections.end(); ++it) { 	responseStream << "\n";
 	responseStream << "                        [";
-#line 114 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 124 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( it - serverCurrentConnections.begin() );
 	responseStream << " , ";
-#line 114 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 124 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( *it );
 	responseStream << "],\n";
 	responseStream << "                    ";
-#line 115 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+#line 125 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "                ]},\n";
 	responseStream << "\n";
-	responseStream << "            ], { xaxis: { max: 12 }, yaxis: { max: ";
-#line 118 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\DefaultPage.cpsp"
+	responseStream << "                { label: \"DatabaseSessionAllocated\", data: [\n";
+	responseStream << "                    ";
+#line 129 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ for (vector<int>::const_iterator it = databaseSessionAllocated.begin(); it != databaseSessionAllocated.end(); ++it) { 	responseStream << "\n";
+	responseStream << "                        [";
+#line 130 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( it - databaseSessionAllocated.begin() );
+	responseStream << " , ";
+#line 130 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( *it );
+	responseStream << "],\n";
+	responseStream << "                    ";
+#line 131 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ } 	responseStream << "\n";
+	responseStream << "                ]},\n";
+	responseStream << "\n";
+	responseStream << "                { label: \"DatabaseSessionUsed\", data: [\n";
+	responseStream << "                    ";
+#line 135 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ for (vector<int>::const_iterator it = databaseSessionUsed.begin(); it != databaseSessionUsed.end(); ++it) { 	responseStream << "\n";
+	responseStream << "                        [";
+#line 136 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( it - databaseSessionUsed.begin() );
+	responseStream << " , ";
+#line 136 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( *it );
+	responseStream << "],\n";
+	responseStream << "                    ";
+#line 137 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ } 	responseStream << "\n";
+	responseStream << "                ]},\n";
+	responseStream << "\n";
+	responseStream << "            ], { xaxis: { max: 180 }, yaxis: { max: ";
+#line 140 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
 	responseStream << ( getThreadPool().capacity() );
+	responseStream << " } });\n";
+	responseStream << "\n";
+	responseStream << "            $.plot($(\"#queueChart\"), [\n";
+	responseStream << "\n";
+	responseStream << "                { label: \"ServerQueuedConnections\", data: [\n";
+	responseStream << "                    ";
+#line 145 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ for (vector<int>::const_iterator it = serverQueuedConnections.begin(); it != serverQueuedConnections.end(); ++it) { 	responseStream << "\n";
+	responseStream << "                        [";
+#line 146 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( it - serverQueuedConnections.begin() );
+	responseStream << " , ";
+#line 146 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( *it );
+	responseStream << "],\n";
+	responseStream << "                    ";
+#line 147 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+ } 	responseStream << "\n";
+	responseStream << "                ]},\n";
+	responseStream << "\n";
+	responseStream << "            ], { xaxis: { max: 180 }, yaxis: { max: ";
+#line 150 "/proj/SIG/home/ehaohug/Lab/projects/PocoLab/cppweb/LightWeightServer/src/DefaultPage.cpsp"
+	responseStream << ( appProp["tcpserver.maxQueued"] );
 	responseStream << " } });\n";
 	responseStream << "        </script>\n";
 	responseStream << "    </body>\n";

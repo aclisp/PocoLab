@@ -28,6 +28,7 @@ well as to define classes needed later on. --%>
     Session db(getSession());
     StudentVector studentVector;
     db << "SELECT ID,NAME,TEL FROM STUDENT", into(studentVector), now;
+    db.close();
 %>
 
 <!DOCTYPE html>
