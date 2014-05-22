@@ -31,6 +31,7 @@
 #include "Poco/DateTimeFormatter.h"
 #include "Poco/Timespan.h"
 #include "Poco/Tuple.h"
+#include "Poco/ErrorHandler.h"
 
 #include <iostream>
 #include <string>

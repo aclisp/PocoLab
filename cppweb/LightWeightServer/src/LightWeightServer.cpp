@@ -28,6 +28,24 @@ using std::string;
 using namespace Poco::Data;
 
 
+class LoggingErrorHandler: public Poco::ErrorHandler
+{
+public:
+    void exception(const Poco::Exception& exc)
+    {
+        poco_error_f1(Application::instance().logger(), "%s", exc.displayText());
+    }
+    void exception(const std::exception& exc)
+    {
+        poco_error_f1(Application::instance().logger(), "%s", exc.what());
+    }
+    void exception()
+    {
+        poco_error(Application::instance().logger(), "unknown exception");
+    }
+};
+
+
 void LightWeightServer::initialize(Application& self)
 {
     loadConfiguration(); // load default configuration files, if present
@@ -85,6 +103,13 @@ int LightWeightServer::main(const std::vector<std::string>& args)
     }
     else
     {
+        // register our logging error handler only for release build
+#if defined(_DEBUG)
+#else
+        LoggingErrorHandler eh;
+        Poco::ErrorHandler* pOldEH = Poco::ErrorHandler::set(&eh);
+#endif
+
         // get parameters from configuration file
         string host = config().getString("serversocket.host", "0.0.0.0");
         unsigned short port = (unsigned short)config().getInt("serversocket.port", 9980);
@@ -121,6 +146,12 @@ int LightWeightServer::main(const std::vector<std::string>& args)
 
         // Stop the HTTPServer
         srv.stopAll();
+
+        // restore our logging error handler only for release build
+#if defined(_DEBUG)
+#else
+        Poco::ErrorHandler::set(pOldEH);
+#endif
     }
 //    Thread::sleep(10000);
     return Application::EXIT_OK;
