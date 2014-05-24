@@ -49,8 +49,8 @@ well as to define classes needed later on. --%>
     <body>
         <h1>All Students</h1>
 
-        <a href="/student/new" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus"></span> New
+        <a href="/student/new" class="btn btn-success pull-right">
+            <span class="glyphicon glyphicon-plus-sign"></span> New
         </a>
 
         <div class="table-responsive"> <table class="table table-striped table-condensed table-hover">
