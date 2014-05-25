@@ -71,7 +71,7 @@ void StudentListPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco:
 	responseStream << "    <body>\n";
 	responseStream << "        <h1>All Students</h1>\n";
 	responseStream << "\n";
-	responseStream << "        <a href=\"/student/new\" class=\"btn btn-success pull-right\">\n";
+	responseStream << "        <a href=\"/student/new\" class=\"btn btn-link pull-right\">\n";
 	responseStream << "            <span class=\"glyphicon glyphicon-plus-sign\"></span> New\n";
 	responseStream << "        </a>\n";
 	responseStream << "\n";

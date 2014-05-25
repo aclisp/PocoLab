@@ -49,7 +49,7 @@ well as to define classes needed later on. --%>
     <body>
         <h1>All Students</h1>
 
-        <a href="/student/new" class="btn btn-success pull-right">
+        <a href="/student/new" class="btn btn-link pull-right">
             <span class="glyphicon glyphicon-plus-sign"></span> New
         </a>
 

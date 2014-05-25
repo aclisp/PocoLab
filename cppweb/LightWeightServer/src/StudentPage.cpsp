@@ -74,27 +74,17 @@ well as to define classes needed later on. --%>
 
         <form action="<%= action %>" method="post">
 
-            <% if (IsNew(request)) { %>
-                <input type="hidden" name="_method" value="POST" >
-                <button type="submit" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-ok-sign"></span> Save
-                </button>
-            <% } %>
             <% if (IsEdit(request)) { %>
-                <input type="hidden" name="_method" value="PUT" >
-                <button type="submit" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-ok-sign"></span> Save
-                </button>
-                <button type="submit" class="btn btn-danger" 
-                        onclick="this.form._method.value='DELETE'">
+            <div class="pull-right">
+                <button type="button" class="btn btn-link" 
+                        onclick="this.form._method.value='DELETE'; this.form.submit()">
                     <span class="glyphicon glyphicon-remove-sign"></span> Delete
                 </button>
-                <a href="/student/new" class="btn btn-success pull-right">
+                <a href="/student/new" class="btn btn-link">
                     <span class="glyphicon glyphicon-plus-sign"></span> New
-                </a>                
+                </a>
+            </div>
             <% } %>
-
-            <p></p>
 
             <input type="hidden" name="id" value="<%= studentId %>" >
             <div class="form-group">
@@ -105,6 +95,23 @@ well as to define classes needed later on. --%>
                 <label for="studentInputTel1">Telephone number</label>
                 <input type="text" class="form-control" id="studentInputTel1" placeholder="Telephone number" name="tel" value="<%= studentTel %>" >
             </div>
+
+            <% if (IsNew(request)) { %>
+                <input type="hidden" name="_method" value="POST" >
+                <button type="submit" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-ok-sign"></span> Save
+                </button>
+                <a href="/student" class="btn btn-default">Cancel</a>
+            <% } %>
+
+            <% if (IsEdit(request)) { %>
+                <input type="hidden" name="_method" value="PUT" >
+                <button type="submit" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-ok-sign"></span> Save
+                </button>
+                <a href="/student" class="btn btn-default">Cancel</a>
+            <% } %>
+
         </form>
 
         <script src="/js/jquery.min.js"></script>

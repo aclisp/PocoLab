@@ -110,52 +110,63 @@ void StudentPage::handleRequest(Poco::Net::HTTPServerRequest& request, Poco::Net
 	responseStream << "\n";
 	responseStream << "            ";
 #line 77 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
- if (IsNew(request)) { 	responseStream << "\n";
-	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"POST\" >\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">\n";
-	responseStream << "                    <span class=\"glyphicon glyphicon-ok-sign\"></span> Save\n";
-	responseStream << "                </button>\n";
-	responseStream << "            ";
-#line 82 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
- } 	responseStream << "\n";
-	responseStream << "            ";
-#line 83 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  if (IsEdit(request)) { 	responseStream << "\n";
-	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"PUT\" >\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">\n";
-	responseStream << "                    <span class=\"glyphicon glyphicon-ok-sign\"></span> Save\n";
-	responseStream << "                </button>\n";
-	responseStream << "                <button type=\"submit\" class=\"btn btn-danger\" \n";
-	responseStream << "                        onclick=\"this.form._method.value='DELETE'\">\n";
+	responseStream << "            <div class=\"pull-right\">\n";
+	responseStream << "                <button type=\"button\" class=\"btn btn-link\" \n";
+	responseStream << "                        onclick=\"this.form._method.value='DELETE'; this.form.submit()\">\n";
 	responseStream << "                    <span class=\"glyphicon glyphicon-remove-sign\"></span> Delete\n";
 	responseStream << "                </button>\n";
-	responseStream << "                <a href=\"/student/new\" class=\"btn btn-success pull-right\">\n";
+	responseStream << "                <a href=\"/student/new\" class=\"btn btn-link\">\n";
 	responseStream << "                    <span class=\"glyphicon glyphicon-plus-sign\"></span> New\n";
-	responseStream << "                </a>                \n";
+	responseStream << "                </a>\n";
+	responseStream << "            </div>\n";
 	responseStream << "            ";
-#line 95 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 87 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
  } 	responseStream << "\n";
 	responseStream << "\n";
-	responseStream << "            <p></p>\n";
-	responseStream << "\n";
 	responseStream << "            <input type=\"hidden\" name=\"id\" value=\"";
-#line 99 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 89 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentId );
 	responseStream << "\" >\n";
 	responseStream << "            <div class=\"form-group\">\n";
 	responseStream << "                <label for=\"studentInputName1\">Name</label>\n";
 	responseStream << "                <input type=\"text\" class=\"form-control\" id=\"studentInputName1\" placeholder=\"Name\" name=\"name\" value=\"";
-#line 102 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 92 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentName );
 	responseStream << "\" >\n";
 	responseStream << "            </div>\n";
 	responseStream << "            <div class=\"form-group\">\n";
 	responseStream << "                <label for=\"studentInputTel1\">Telephone number</label>\n";
 	responseStream << "                <input type=\"text\" class=\"form-control\" id=\"studentInputTel1\" placeholder=\"Telephone number\" name=\"tel\" value=\"";
-#line 106 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+#line 96 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
 	responseStream << ( studentTel );
 	responseStream << "\" >\n";
 	responseStream << "            </div>\n";
+	responseStream << "\n";
+	responseStream << "            ";
+#line 99 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+ if (IsNew(request)) { 	responseStream << "\n";
+	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"POST\" >\n";
+	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">\n";
+	responseStream << "                    <span class=\"glyphicon glyphicon-ok-sign\"></span> Save\n";
+	responseStream << "                </button>\n";
+	responseStream << "                <a href=\"/student\" class=\"btn btn-default\">Cancel</a>\n";
+	responseStream << "            ";
+#line 105 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+ } 	responseStream << "\n";
+	responseStream << "\n";
+	responseStream << "            ";
+#line 107 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+ if (IsEdit(request)) { 	responseStream << "\n";
+	responseStream << "                <input type=\"hidden\" name=\"_method\" value=\"PUT\" >\n";
+	responseStream << "                <button type=\"submit\" class=\"btn btn-warning\">\n";
+	responseStream << "                    <span class=\"glyphicon glyphicon-ok-sign\"></span> Save\n";
+	responseStream << "                </button>\n";
+	responseStream << "                <a href=\"/student\" class=\"btn btn-default\">Cancel</a>\n";
+	responseStream << "            ";
+#line 113 "D:\\CppDev\\PocoLab\\cppweb\\LightWeightServer\\src\\StudentPage.cpsp"
+ } 	responseStream << "\n";
+	responseStream << "\n";
 	responseStream << "        </form>\n";
 	responseStream << "\n";
 	responseStream << "        <script src=\"/js/jquery.min.js\"></script>\n";
